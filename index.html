@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuitomètre 🍺</title>
+ 
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+ 
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+ 
+    h1 {
+      text-align: center;
+    }
+ 
+    .question {
+      margin-bottom: 20px;
+    }
+ 
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #6c5ce7;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+ 
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+ 
+    .faible { background: #d4edda; }
+    .modere { background: #fff3cd; }
+    .eleve { background: #f8d7da; }
+  </style>
+</head>
+ 
+<body>
+ 
+<div class="container">
+  <h1>🍺 Cuitomètre</h1>
+ 
+  <form id="quizForm">
+ 
+    <div class="question">
+      <p>On est vendredi ou samedi ?</p>
+      <label><input type="radio" name="q1" value="3"> Oui</label><br>
+      <label><input type="radio" name="q1" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>Je suis avec des gens festifs que j’apprécie ?</p>
+      <label><input type="radio" name="q2" value="2"> Oui</label><br>
+      <label><input type="radio" name="q2" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>Je n’ai pas ou peu mangé ?</p>
+      <label><input type="radio" name="q3" value="2"> Oui</label><br>
+      <label><input type="radio" name="q3" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>Je suis contente et enjouée ?</p>
+      <label><input type="radio" name="q4" value="1"> Oui</label><br>
+      <label><input type="radio" name="q4" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>Je n’ai rien de prévu demain matin ?</p>
+      <label><input type="radio" name="q5" value="3"> Oui</label><br>
+      <label><input type="radio" name="q5" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>J’ai bu et j’ai envie de continuer ?</p>
+      <label><input type="radio" name="q6" value="2"> Oui</label><br>
+      <label><input type="radio" name="q6" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>Il y a un endroit cool pour danser ?</p>
+      <label><input type="radio" name="q7" value="3"> Oui</label><br>
+      <label><input type="radio" name="q7" value="0"> Non</label>
+    </div>
+ 
+    <div class="question">
+      <p>La météo est bonne ?</p>
+      <label><input type="radio" name="q8" value="1"> Oui</label><br>
+      <label><input type="radio" name="q8" value="0"> Non</label>
+    </div>
+ 
+    <button type="button" onclick="calculateRisk()">Calculer mon risque</button>
+ 
+  </form>
+ 
+  <div id="result" class="result"></div>
+</div>
+ 
+<script>
+function calculateRisk() {
+  let form = document.forms["quizForm"];
+  let score = 0;
+  let questions = ["q1","q2","q3","q4","q5","q6","q7","q8"];
+ 
+  for (let q of questions) {
+    let answer = form[q].value;
+    if (!answer) {
+      alert("Merci de répondre à toutes les questions !");
+      return;
+    }
+    score += parseInt(answer);
+  }
+ 
+  let resultDiv = document.getElementById("result");
+  resultDiv.style.display = "block";
+ 
+  let message = "";
+  let className = "";
+ 
+  if (score <= 7) {
+    className = "faible";
+    message = "🟢 Risque faible : Profite mais reviens plus tard vers le cuitomètre !";
+  } else if (score <= 13) {
+    className = "modere";
+    message = "🟡 Risque modéré : Encore une bière puis pause 30 min + 1 pinte d’eau. Alcool fort en micro dose seulement.";
+  } else {
+    className = "eleve";
+    message = "🔴 Risque élevé : STOP ! Pause 45 min + 2 pintes d’eau. Reprise lente et micro dosée uniquement.";
+  }
+ 
+  resultDiv.className = "result " + className;
+  resultDiv.innerHTML = `<strong>Score : ${score}</strong><br><br>${message}`;
+}
+</script>
+ 
+</body>
+</html>
