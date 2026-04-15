@@ -138,13 +138,13 @@ function calculateRisk() {
  
   if (score <= 7) {
     className = "faible";
-    message = "🟢 Risque faible : Profite mais reviens plus tard vers le cuitomètre !";
+    message = "🟢 Risque faible : Profite mais pense à manger et reviens plus tard vers le cuitomètre !";
   } else if (score <= 13) {
     className = "modere";
-    message = "🟡 Risque modéré : Encore une bière puis pause 30 min + 1 pinte d’eau. Alcool fort en micro dose seulement.";
+    message = "🟡 Risque modéré : Mange un peu, encore une bière puis pause 30 min + 1 pinte d’eau. Alcool fort en micro dose seulement.";
   } else {
     className = "eleve";
-    message = "🔴 Risque élevé : STOP ! Pause 45 min + 2 pintes d’eau. Reprise lente et micro dosée uniquement.";
+    message = "🔴 Risque élevé : STOP ! Mange quelque chose et pause 45 min + 2 pintes d’eau. Reprise lente et micro dosée uniquement.";
   }
  
   resultDiv.className = "result " + className;
